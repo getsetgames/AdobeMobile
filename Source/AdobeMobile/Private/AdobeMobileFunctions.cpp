@@ -12,7 +12,7 @@
 #include "AndroidApplication.h"
 #endif
 
-void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, FString data)
+void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, TArray<FString> dataKeys, TArray<FString> dataValues)
 {
     UE_LOG(LogAdobeMobile, Log, TEXT("Tracking State..."));
     
@@ -31,7 +31,7 @@ void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, FString data)
 #endif
 }
 
-void UAdobeMobileFunctions::AdobeMobileTrackAction(FString state, FString data)
+void UAdobeMobileFunctions::AdobeMobileTrackAction(FString state, TArray<FString> dataKeys, TArray<FString> dataValues)
 {
     UE_LOG(LogAdobeMobile, Log, TEXT("Tracking Action..."));
     

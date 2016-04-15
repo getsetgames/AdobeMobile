@@ -13,5 +13,10 @@ class UAdobeMobileFunctions : public UObject {
 	GENERATED_BODY()
 	
 public:
-	
+    
+    UFUNCTION(BlueprintCallable, meta = (Keywords = "adobe mobile advertising"), Category = "AdobeMobile")
+    static void AdobeMobileTrackState(FString state, TArray<FString> dataKeys, TArray<FString> dataValues);
+    
+    UFUNCTION(BlueprintCallable, meta = (Keywords = "adobe mobile advertising"), Category = "AdobeMobile")
+    static void AdobeMobileTrackAction(FString state, TArray<FString> dataKeys, TArray<FString> dataValues);
 };
