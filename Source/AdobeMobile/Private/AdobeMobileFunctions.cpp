@@ -34,7 +34,6 @@ void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, TArray<FString>
     // Verify that keys are of allowed data types by Adobe Mobile plugin
     
 #if PLATFORM_IOS
-    [ADBMobile trackState:@"" data:@{ }];
     NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:kNumKeys];
     
     for (uint32 i = 0; i < kNumKeys; i++)
@@ -44,6 +43,9 @@ void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, TArray<FString>
         
         d[k.GetNSString()] = v.GetNSString();
     }
+    
+    [ADBMobile trackState:state.GetNSString() data:d];
+    
 #elif PLATFORM_ANDROID
     if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
     {
@@ -77,7 +79,6 @@ void UAdobeMobileFunctions::AdobeMobileTrackAction(FString state, TArray<FString
     }
     
 #if PLATFORM_IOS
-    [ADBMobile trackAction:@"" data:@{ }];
     NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:kNumKeys];
     
     for (uint32 i = 0; i < kNumKeys; i++)
@@ -87,6 +88,8 @@ void UAdobeMobileFunctions::AdobeMobileTrackAction(FString state, TArray<FString
         
         d[k.GetNSString()] = v.GetNSString();
     }
+    
+    [ADBMobile trackAction:state.GetNSString() data:d];
 #elif PLATFORM_ANDROID
     if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
     {
