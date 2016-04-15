@@ -67,6 +67,7 @@ namespace UnrealBuildTool.Rules
 
 				PublicAdditionalLibraries.Add(Path.Combine(LibDir,"AdobeMobileLibrary_Extension.a"));
 				PublicAdditionalLibraries.Add(Path.Combine(LibDir,"AdobeMobileLibrary.a"));
+				PublicAdditionalLibraries.Add("sqlite3");
 
 				PublicFrameworks.AddRange( 
 					new string[] 
