@@ -14,4 +14,19 @@ class UAdobeMobileSettings : public UObject
 	
 public:
 	UAdobeMobileSettings(const FObjectInitializer& ObjectInitializer);
+    
+    UPROPERTY(Config, EditAnywhere, Category=General, meta=(DisplayName="Offline Tracking"))
+    bool OfflineTracking;
+    
+    UPROPERTY(Config, EditAnywhere, Category=General, meta=(DisplayName="Lifecycle Timeout"))
+    uint32 LifecycleTimeout;
+    
+    UPROPERTY(Config, EditAnywhere, Category=General, meta=(DisplayName="App Name"))
+    FString AppName;
+    
+    UPROPERTY(Config, EditAnywhere, Category=General, meta=(DisplayName="Tracking Report Suite ID (RSID)"))
+    FString TrackingRSID;
+    
+    UPROPERTY(Config, EditAnywhere, Category=General, meta=(DisplayName="Tracking Server"))
+    FString TrackingServer;
 };

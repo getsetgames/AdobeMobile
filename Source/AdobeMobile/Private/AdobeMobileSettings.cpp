@@ -8,5 +8,10 @@
 
 UAdobeMobileSettings::UAdobeMobileSettings(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
+, OfflineTracking(false)
+, LifecycleTimeout(900)
+, AppName("")
+, TrackingRSID("")
+, TrackingServer("")
 {
 }
