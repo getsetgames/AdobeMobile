@@ -15,9 +15,35 @@
 void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, TArray<FString> dataKeys, TArray<FString> dataValues)
 {
     UE_LOG(LogAdobeMobile, Log, TEXT("Tracking State..."));
+
+    const int32 kNumKeys   = dataKeys.Num();
+    const int32 kNumValues = dataValues.Num();
+    
+    if (kNumKeys == 0 || kNumValues == 0)
+    {
+        UE_LOG(LogAdobeMobile, Log, TEXT("keys and/or value arguments are empty"));
+        return;
+    }
+    
+    if (kNumKeys != kNumValues)
+    {
+         UE_LOG(LogAdobeMobile, Log, TEXT("number of keys are not equal to number of values"));
+        return;
+    }
+    
+    // Verify that keys are of allowed data types by Adobe Mobile plugin
     
 #if PLATFORM_IOS
     [ADBMobile trackState:@"" data:@{ }];
+    NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:kNumKeys];
+    
+    for (uint32 i = 0; i < kNumKeys; i++)
+    {
+        FString &k = dataKeys[i];
+        FString &v = dataValues[i];
+        
+        d[k.GetNSString()] = v.GetNSString();
+    }
 #elif PLATFORM_ANDROID
     if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
     {
@@ -35,8 +61,32 @@ void UAdobeMobileFunctions::AdobeMobileTrackAction(FString state, TArray<FString
 {
     UE_LOG(LogAdobeMobile, Log, TEXT("Tracking Action..."));
     
+    const int32 kNumKeys   = dataKeys.Num();
+    const int32 kNumValues = dataValues.Num();
+    
+    if (kNumKeys == 0 || kNumValues == 0)
+    {
+        UE_LOG(LogAdobeMobile, Log, TEXT("keys and/or value arguments are empty"));
+        return;
+    }
+    
+    if (kNumKeys != kNumValues)
+    {
+        UE_LOG(LogAdobeMobile, Log, TEXT("number of keys are not equal to number of values"));
+        return;
+    }
+    
 #if PLATFORM_IOS
     [ADBMobile trackAction:@"" data:@{ }];
+    NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:kNumKeys];
+    
+    for (uint32 i = 0; i < kNumKeys; i++)
+    {
+        FString &k = dataKeys[i];
+        FString &v = dataValues[i];
+        
+        d[k.GetNSString()] = v.GetNSString();
+    }
 #elif PLATFORM_ANDROID
     if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
     {
