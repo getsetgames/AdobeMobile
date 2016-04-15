@@ -7,6 +7,13 @@
 #include "AdobeMobileSettings.h"
 #include "ISettingsModule.h"
 
+#if PLATFORM_IOS
+#import "../../lib/iOS/ADBMobile.h"
+#elif PLATFORM_ANDROID
+#include "Android/AndroidJNI.h"
+#include "AndroidApplication.h"
+#endif
+
 DEFINE_LOG_CATEGORY(LogAdobeMobile);
 
 #define LOCTEXT_NAMESPACE "AdobeMobile"
@@ -30,6 +37,30 @@ void FAdobeMobile::StartupModule()
 										 GetMutableDefault<UAdobeMobileSettings>()
 										 );
 	}
+    
+    const UAdobeMobileSettings *settings = GetDefault<UAdobeMobileSettings>();
+    
+#if PLATFORM_IOS
+    NSString *sdkVersion = [NSString stringWithFormat:@"%@:%@:%@",
+                            [ADBMobile version],
+                            [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"],
+                            [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"]];
+    
+    NSDictionary *d = @{ @"appname"    : settings->AppName.GetNSString(),
+                         @"sdkversion" : sdkVersion };
+    
+    [ADBMobile collectLifecycleDataWithAdditionalData:d];
+#elif PLATFORM_ANDROID
+    if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
+    {
+        static jmethodID Method = FJavaWrapper::FindMethod(Env,
+                                                           FJavaWrapper::GameActivityClassID,
+                                                           "AndroidThunkJava_AdobeMobile_Start", "()Ljava/lang/String;",
+                                                           false);
+        
+        FJavaWrapper::CallObjectMethod(Env, FJavaWrapper::GameActivityThis, Method);
+    }
+#endif
 }
 
 
