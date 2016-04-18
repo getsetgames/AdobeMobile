@@ -9,7 +9,8 @@
 
 	<!-- optional updates applied to AndroidManifest.xml -->
 	<androidManifestUpdates>
-
+		<addPermission android:name="android.permission.INTERNET"/>
+		<addPermission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	</androidManifestUpdates> 
 
 	<!-- optional additions to proguard -->
@@ -27,7 +28,7 @@
 	<!-- optional additions to the GameActivity imports in GameActivity.java -->
 	<gameActivityImportAdditions>
 		<insert>
-
+import com.adobe.mobile.*;
 		</insert>
 	</gameActivityImportAdditions>
 	
@@ -46,6 +47,7 @@
 	
 	<!-- optional additions to GameActivity onCreate in GameActivity.java -->
 	<gameActivityOnCreateAdditions>
+Config.setContext(this.getApplicationContext());		
 	</gameActivityOnCreateAdditions>
 
 	<!-- optional additions to GameActivity onDestroy in GameActivity.java -->
@@ -74,7 +76,7 @@
 	<!-- optional additions to GameActivity onPause in GameActivity.java	-->
 	<gameActivityOnPauseAdditions>
 		<insert>
-
+Config.collectLifecycleData(this);
 		</insert>
 	</gameActivityOnPauseAdditions>
 
@@ -82,16 +84,41 @@
 	<!-- optional additions to GameActivity onResume in GameActivity.java	-->
 	<gameActivityOnResumeAdditions>
 		<insert>
-
+Config.collectLifecycleData(this);
 		</insert>
 	</gameActivityOnResumeAdditions>
 
 
 	<!-- optional additions to GameActivity onActivityResult in GameActivity.java -->
-	<gameActivityOnActivityResultAdditions>
-	</gameActivityOnActivityResultAdditions>
+	<gameActivityOnActivityResultAdditions><![CDATA[
+
+public static void AndroidThunkJava_AdobeMobile_TrackState(String state, String[] keys, String[] values) 
+{
+	Hashtable<String, String> contextData = new Hashtable<String, String>();
+
+	for (int i = 0; i < keys.length; i++)
+	{
+		contextData.put(keys[i], values[i]);
+    }
+
+	Analytics.trackState(state, contextData);	
+}
+
+public static void AndroidThunkJava_AdobeMobile_TrackAction(String action, String[] keys, String[] values) 
+{
+	Hashtable<String, String> contextData = new Hashtable<String, String>();
+
+	for (int i = 0; i < keys.length; i++)
+	{
+		contextData.put(keys[i], values[i]);
+    }
+	
+	Analytics.trackAction(action, contextData);	
+}
 	
 
+	]]></gameActivityOnActivityResultAdditions>
+	
 	<!-- optional libraries to load in GameActivity.java before libUE4.so -->
 	<soLoadLibrary>
 

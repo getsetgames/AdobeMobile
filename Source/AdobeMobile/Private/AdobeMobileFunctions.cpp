@@ -51,7 +51,8 @@ void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, TArray<FString>
     {
         static jmethodID Method = FJavaWrapper::FindMethod(Env,
                                                            FJavaWrapper::GameActivityClassID,
-                                                           "AndroidThunkJava_AdobeMobile_TrackState", "()Ljava/lang/String;",
+                                                           "AndroidThunkJava_AdobeMobile_TrackState",
+                                                           "()Ljava/lang/String;[java/lang/String;[java/lang/String;",
                                                            false);
         
         FJavaWrapper::CallObjectMethod(Env, FJavaWrapper::GameActivityThis, Method);
@@ -95,7 +96,8 @@ void UAdobeMobileFunctions::AdobeMobileTrackAction(FString state, TArray<FString
     {
         static jmethodID Method = FJavaWrapper::FindMethod(Env,
                                                            FJavaWrapper::GameActivityClassID,
-                                                           "AndroidThunkJava_AdobeMobile_TrackAction", "()Ljava/lang/String;",
+                                                           "AndroidThunkJava_AdobeMobile_TrackAction",
+                                                           "()Ljava/lang/String;[java/lang/String;[java/lang/String;",
                                                            false);
         
         FJavaWrapper::CallObjectMethod(Env, FJavaWrapper::GameActivityThis, Method);
