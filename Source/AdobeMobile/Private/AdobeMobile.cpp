@@ -51,15 +51,8 @@ void FAdobeMobile::StartupModule()
     
     [ADBMobile collectLifecycleDataWithAdditionalData:d];
 #elif PLATFORM_ANDROID
-    if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
-    {
-        static jmethodID Method = FJavaWrapper::FindMethod(Env,
-                                                           FJavaWrapper::GameActivityClassID,
-                                                           "AndroidThunkJava_AdobeMobile_Start", "()Ljava/lang/String;",
-                                                           false);
-        
-        FJavaWrapper::CallObjectMethod(Env, FJavaWrapper::GameActivityThis, Method);
-    }
+    // Initilization of Android is done through plugin APL file.
+    //
 #endif
 }
 
