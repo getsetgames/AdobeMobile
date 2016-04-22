@@ -53,11 +53,13 @@ namespace UnrealBuildTool.Rules
 				"Settings"
 			}
 			);
-
-			AdditionalBundleResources.Add(new UEBuildBundleResource(Path.Combine(ModuleDirectory,"..","..","lib","ADBMobileConfig.json"), "", true));
+			
+			if (Target.Platform == UnrealTargetPlatform.IOS || Target.Platform == UnrealTargetPlatform.Android)
+			{
+				AdditionalBundleResources.Add(new UEBuildBundleResource(Path.Combine(ModuleDirectory,"..","..","lib","ADBMobileConfig.json"), "", true));				
+			}
 
 			if (Target.Platform == UnrealTargetPlatform.IOS) {
-
 				var LibDir = Path.Combine(ModuleDirectory,"..","..","lib","iOS");
 				PrivateIncludePaths.Add(LibDir);
 
