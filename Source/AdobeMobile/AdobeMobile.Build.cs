@@ -54,6 +54,7 @@ namespace UnrealBuildTool.Rules
 			}
 			);
 
+			AdditionalBundleResources.Add(new UEBuildBundleResource(Path.Combine(ModuleDirectory,"..","..","lib","ADBMobileConfig.json"), "", true));
 
 			if (Target.Platform == UnrealTargetPlatform.IOS) {
 
