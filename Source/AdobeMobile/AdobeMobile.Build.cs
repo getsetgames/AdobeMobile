@@ -9,11 +9,6 @@ namespace UnrealBuildTool.Rules
 {
 	public class AdobeMobile : ModuleRules
 	{
-		private string ModulePath
-		{
-			get { return Path.GetDirectoryName( RulesCompiler.GetModuleFilename( this.GetType().Name ) ); }
-		}
-		
 		public AdobeMobile(TargetInfo Target)
 		{
 			PublicIncludePaths.AddRange(
@@ -62,7 +57,7 @@ namespace UnrealBuildTool.Rules
 
 			if (Target.Platform == UnrealTargetPlatform.IOS) {
 
-				var LibDir = Path.Combine(ModulePath,"..","..","lib","iOS");
+				var LibDir = Path.Combine(ModuleDirectory,"..","..","lib","iOS");
 				PrivateIncludePaths.Add(LibDir);
 
 				PublicAdditionalLibraries.Add(Path.Combine(LibDir,"AdobeMobileLibrary_Extension.a"));
