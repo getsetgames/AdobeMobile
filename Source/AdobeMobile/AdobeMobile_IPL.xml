@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root xmlns:android="http://schemas.android.com/apk/res/ios">
+	<!-- init section is always evaluated once per architecture -->
+	<init>
+		<log text="AdobeMobile init"/>
+		<setStringFromProperty result="sAdobeMobileTrackingServer" ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="TrackingServer" default=""/>
+		<setStringReplace result="" dstFile="$S(BundleDir)/ADBMobileConfig.json" srcFile="$S(PluginDir)/../../lib/ADBMobileConfig.json" find="$${target-server}$$" with="$S(sAdobeMobileTrackingServer)"/>
+	</init>
+</root>
