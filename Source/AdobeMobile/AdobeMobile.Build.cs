@@ -53,11 +53,6 @@ namespace UnrealBuildTool.Rules
 				"Settings"
 			}
 			);
-			
-			if (Target.Platform == UnrealTargetPlatform.IOS || Target.Platform == UnrealTargetPlatform.Android)
-			{
-				AdditionalBundleResources.Add(new UEBuildBundleResource(Path.Combine(ModuleDirectory,"..","..","lib","ADBMobileConfig.json"), "", true));				
-			}
 
 			if (Target.Platform == UnrealTargetPlatform.IOS) {
 				var LibDir = Path.Combine(ModuleDirectory,"..","..","lib","iOS");
@@ -73,6 +68,9 @@ namespace UnrealBuildTool.Rules
 						"SystemConfiguration"
 					}
 				);
+
+				string PluginPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
+				AdditionalPropertiesForReceipt.Add(new ReceiptProperty("IOSPlugin", Path.Combine(PluginPath, "AdobeMobile_IPL.xml")));
 			}
 			else if(Target.Platform == UnrealTargetPlatform.Android)
 			{
