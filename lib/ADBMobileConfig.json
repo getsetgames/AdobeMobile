@@ -2,7 +2,7 @@
     "version" : "1.0",
     "analytics" : {
         "rsids" : "",
-        "server" : "",
+        "server" : "$${target-server}$$",
         "charset" : "UTF-8",
         "ssl" : false,
 		"offlineEnabled" : false,
