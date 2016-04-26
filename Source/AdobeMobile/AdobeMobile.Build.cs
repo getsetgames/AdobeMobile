@@ -63,7 +63,6 @@ namespace UnrealBuildTool.Rules
 				var LibDir = Path.Combine(ModuleDirectory,"..","..","lib","iOS");
 				PrivateIncludePaths.Add(LibDir);
 
-				PublicAdditionalLibraries.Add(Path.Combine(LibDir,"AdobeMobileLibrary_Extension.a"));
 				PublicAdditionalLibraries.Add(Path.Combine(LibDir,"AdobeMobileLibrary.a"));
 				PublicAdditionalLibraries.Add("sqlite3");
 
