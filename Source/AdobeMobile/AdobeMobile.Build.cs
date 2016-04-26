@@ -56,6 +56,8 @@ namespace UnrealBuildTool.Rules
 			}
 			);
 
+			PublicIncludePathModuleNames.Add("Launch");
+
 			if (Target.Platform == UnrealTargetPlatform.IOS) {
 				var LibDir = Path.Combine(ModuleDirectory,"..","..","lib","iOS");
 				PrivateIncludePaths.Add(LibDir);
