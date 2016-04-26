@@ -14,12 +14,14 @@ namespace UnrealBuildTool.Rules
 			PublicIncludePaths.AddRange(
 				new string[] {
 					// ... add public include paths required here ...
+					"../../../../Source/Runtime/Core/Public",
+					"../../../../Source/Runtime/Launch/Public"
 				}
 				);
 
 			PrivateIncludePaths.AddRange(
 				new string[] {
-					"Developer/AdobeMobile/Private",
+					"AdobeMobile/Private"
 					// ... add other private include paths required here ...
 				}
 				);
