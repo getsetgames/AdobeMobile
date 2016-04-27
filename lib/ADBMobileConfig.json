@@ -1,12 +1,12 @@
 {
     "version" : "1.0",
     "analytics" : {
-        "rsids" : "",
+        "rsids" : "$${tracking-rsid}$$",
         "server" : "$${target-server}$$",
         "charset" : "UTF-8",
         "ssl" : false,
-		"offlineEnabled" : false,
-        "lifecycleTimeout" : 300,
+		"offlineEnabled" : "$${offline-tracking}$$",
+        "lifecycleTimeout" : "$${lifecycle-timeout}$$",
 		"referrerTimeout" : 0,
         "batchLimit" : 0,
         "privacyDefault" : "optedin",
@@ -23,6 +23,6 @@
 	},
 	"acquisition" : {
 		"server" : "",
-		"appid" : ""
+		"appid" : "$${app-name}$$"
 	}
 }
