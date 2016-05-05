@@ -5,15 +5,26 @@
 	<init>
 		<log text="AdobeMobile init"/>
 
-		<setStringFromProperty result="sAdobeMobileTrackingServer"  ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="TrackingServer"   default=""/>
-		<setStringFromProperty result="sAdobeMobileTrackingRSID"    ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="TrackingRSID"     default=""/>
-		<setStringFromProperty result="sAdobeMobileAppName"         ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="AppName"          default=""/>
-		<setBoolFromProperty   result="bAdobeMobileOfflineTracking" ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="OfflineTracking"  default="false"/>
-		<setIntFromProperty    result="iLifeCycleTimeout"           ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="LifecycleTimeout" default="900"/>
+		<setStringFromProperty result="sAdobeMobileTrackingServer"          ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="TrackingServer" default=""/>
+		<setStringFromProperty result="sAdobeMobileTrackingRSIDDevelopment" ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="TrackingRSIDDevelopment"  default=""/>
+		<setStringFromProperty result="sAdobeMobileTrackingRSIDShipping"    ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="TrackingRSIDShipping" default=""/>
+		<setStringFromProperty result="sAdobeMobileAppName"       	        ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="AppName" default=""/>
+		<setBoolFromProperty   result="bAdobeMobileOfflineTracking" 	    ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="OfflineTracking"  default="false"/>
+		<setIntFromProperty    result="iLifeCycleTimeout"           	    ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="LifecycleTimeout" default="900"/>
 
 		<setStringReplace result="sAdobeMobileConfigResult" sourceFile="$S(PluginDir)/../../lib/ADBMobileConfig.json" find="$${app-name}$$" with="$S(sAdobeMobileAppName)" default=""/>
+		
+		<if condition="Distribution">
+			<true>
+				<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${tracking-rsid}$$" with="$S(sAdobeMobileTrackingRSIDShipping)" default=""/>
+			</true>
+			<false>
+				<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${tracking-rsid}$$" with="$S(sAdobeMobileTrackingRSIDDevelopment)" default=""/>
+			</false>
+		</if>
+
 		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${target-server}$$" with="$S(sAdobeMobileTrackingServer)" default=""/>
-		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${tracking-rsid}$$" with="$S(sAdobeMobileTrackingRSID)" default=""/>
+
 		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="&quot;$${offline-tracking}$$&quot;" with="$B(bAdobeMobileOfflineTracking)" default="true"/>
 		<setStringReplace resultFile="$S(BundleDir)/ADBMobileConfig.json" source="$S(sAdobeMobileConfigResult)" find="&quot;$${lifecycle-timeout}$$&quot;" with="$I(iLifeCycleTimeout)" default="900"/>
 	</init>
