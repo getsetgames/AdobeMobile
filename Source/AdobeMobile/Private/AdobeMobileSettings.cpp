@@ -11,7 +11,8 @@ UAdobeMobileSettings::UAdobeMobileSettings(const FObjectInitializer& ObjectIniti
 , OfflineTracking(false)
 , LifecycleTimeout(900)
 , AppName("")
-, TrackingRSID("")
+, TrackingRSIDDevelopment("")
+, TrackingRSIDShipping("")
 , TrackingServer("")
 {
 }

@@ -24,8 +24,11 @@ public:
     UPROPERTY(Config, EditAnywhere, Category=General, meta=(DisplayName="App Name"))
     FString AppName;
     
-    UPROPERTY(Config, EditAnywhere, Category=General, meta=(DisplayName="Tracking Report Suite ID (RSID)"))
-    FString TrackingRSID;
+    UPROPERTY(Config, EditAnywhere, Category=General, meta=(DisplayName="Tracking Report Suite ID (RSID) - Development"))
+    FString TrackingRSIDDevelopment;
+   
+    UPROPERTY(Config, EditAnywhere, Category=General, meta=(DisplayName="Tracking Report Suite ID (RSID) - Shipping"))
+    FString TrackingRSIDShipping;
     
     UPROPERTY(Config, EditAnywhere, Category=General, meta=(DisplayName="Tracking Server"))
     FString TrackingServer;
