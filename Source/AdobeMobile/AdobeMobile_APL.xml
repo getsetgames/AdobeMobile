@@ -25,7 +25,7 @@
 		</if>
 
 		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="&quot;$${offline-tracking}$$&quot;" with="$B(bAdobeMobileOfflineTracking)" default="true"/>
-		<setStringReplace result="sAdobeMobileConfigResult" resultFile="$S(BuildDir)/ADBMobileConfig.json" source="$S(sAdobeMobileConfigResult)" find="&quot;$${lifecycle-timeout}$$&quot;" with="$I(iLifeCycleTimeout)" default="900"/>
+		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="&quot;$${lifecycle-timeout}$$&quot;" with="$I(iLifeCycleTimeout)" default="900"/>
 	</init>
 
 	<!-- optional updates applied to AndroidManifest.xml -->
