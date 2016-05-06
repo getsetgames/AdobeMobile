@@ -9,7 +9,7 @@
 		<setStringFromProperty result="sAdobeMobileTrackingRSIDDevelopment" ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="TrackingRSIDDevelopment"  default=""/>
 		<setStringFromProperty result="sAdobeMobileTrackingRSIDShipping"    ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="TrackingRSIDShipping" default=""/>
 		<setStringFromProperty result="sAdobeMobileAppName"       	        ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="AppName" default=""/>
-		<setBoolFromProperty   result="bAdobeMobileOfflineTracking" 	    ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="OfflineTracking"  default="false"/>
+		<setBoolFromProperty   result="bAdobeMobileOfflineTracking" 	    ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="OfflineTracking"  default="true"/>
 		<setIntFromProperty    result="iLifeCycleTimeout"           	    ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="LifecycleTimeout" default="900"/>
 
 		<setStringReplace result="sAdobeMobileConfigResult" sourceFile="$S(PluginDir)/../../lib/ADBMobileConfig.json" find="$${app-name}$$" with="$S(sAdobeMobileAppName)" default=""/>
