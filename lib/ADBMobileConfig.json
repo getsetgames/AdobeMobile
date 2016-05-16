@@ -10,7 +10,6 @@
 		"referrerTimeout" : 0,
         "batchLimit" : 0,
         "privacyDefault" : "optedin",
-		"backdateSessionInfo" : false,
 		"poi" : []
     },
 	"target" : {
@@ -19,7 +18,6 @@
 	},
 	"audienceManager" : {
 		"server" : "",
-		"analyticsForwardingEnabled": false
 	},
 	"acquisition" : {
 		"server" : "",
