@@ -13,7 +13,6 @@
 		<setIntFromProperty    result="iLifeCycleTimeout"                   ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="LifecycleTimeout" default="900"/>
 
 		<setStringReplace result="sAdobeMobileConfigResult" sourceFile="$S(PluginDir)/../../lib/ADBMobileConfig.json" find="$${app-name}$$" with="$S(sAdobeMobileAppName)" default=""/>
-		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${target-server}$$" with="$S(sAdobeMobileTrackingServer)" default=""/>
 
 		<if condition="Distribution">
 			<true>
@@ -24,8 +23,10 @@
 			</false>
 		</if>
 
-		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="&quot;$${offline-tracking}$$&quot;" with="$B(bAdobeMobileOfflineTracking)" default="true"/>
+		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="&quot;$${offline-tracking}$$&quot;"  with="$B(bAdobeMobileOfflineTracking)" default="true"/>
 		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="&quot;$${lifecycle-timeout}$$&quot;" with="$I(iLifeCycleTimeout)" default="900"/>
+		<setStringReplace resultFile="$S(PluginDir)/../../lib/ADBMobileConfig.generated.json" result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${target-server}$$" with="$S(sAdobeMobileTrackingServer)" default=""/>
+
 	</init>
 
 	<!-- optional updates applied to AndroidManifest.xml -->
@@ -43,7 +44,8 @@
 	
 	<!-- optional files or directories to copy to Intermediate/Android/APK -->
  	<resourceCopies>
-		<copyDir src="$S(EngineDir)/Plugins/GSG/AdobeMobile/lib/Android" dst="$S(BuildDir)/libs" />
+		<copyDir  src="$S(EngineDir)/Plugins/GSG/AdobeMobile/lib/Android"      dst="$S(BuildDir)/libs" />
+		<copyFile src="$S(PluginDir)/../../lib/ADBMobileConfig.generated.json" dst="$S(BuildDir)/ADBMobileConfig.json" />
 	</resourceCopies>
 
 	<!-- optional additions to the GameActivity imports in GameActivity.java -->
