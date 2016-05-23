@@ -45,7 +45,7 @@
 	<!-- optional files or directories to copy to Intermediate/Android/APK -->
  	<resourceCopies>
 		<copyDir  src="$S(EngineDir)/Plugins/GSG/AdobeMobile/lib/Android"      dst="$S(BuildDir)/libs" />
-		<copyFile src="$S(PluginDir)/../../lib/ADBMobileConfig.generated.json" dst="$S(BuildDir)/ADBMobileConfig.json" />
+		<copyFile src="$S(PluginDir)/../../lib/ADBMobileConfig.generated.json" dst="$S(BuildDir)/src/main/assets/ADBMobileConfig.json" />
 	</resourceCopies>
 
 	<!-- optional additions to the GameActivity imports in GameActivity.java -->
