@@ -70,7 +70,9 @@ import com.adobe.mobile.*;
 	
 	<!-- optional additions to GameActivity onCreate in GameActivity.java -->
 	<gameActivityOnCreateAdditions>
+		<insert>
 Config.setContext(this.getApplicationContext());		
+		</insert>
 	</gameActivityOnCreateAdditions>
 
 	<!-- optional additions to GameActivity onDestroy in GameActivity.java -->
