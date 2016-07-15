@@ -3,6 +3,7 @@
 //  Copyright (c) 2016 Get Set Games Inc. All rights reserved.
 //
 
+using System;
 using System.IO;
 
 namespace UnrealBuildTool.Rules
@@ -57,6 +58,25 @@ namespace UnrealBuildTool.Rules
 			);
 
 			PublicIncludePathModuleNames.Add("Launch");
+
+			String JSONConfigFile = Path.Combine(ModuleDirectory,"..","..","lib","ADBMobileConfig.json");
+			String RSID           = File.ReadAllText(JSONConfigFile);
+
+			// Dump in new placeholders to signfiy build configurations being used.  Final RSID replacement will 
+			// be done in IPL/APL script
+			//
+			if (Target.Configuration == UnrealTargetConfiguration.Development)
+			{
+				RSID = RSID.Replace("$${tracking-rsid}$$", "$${tracking-rsid-development}$$");
+			}
+			else if (Target.Configuration == UnrealTargetConfiguration.Shipping)
+			{
+				RSID = RSID.Replace("$${tracking-rsid}$$", "$${tracking-rsid-shipping}$$");
+			}
+
+			String JSONIntermediateConfigFile = Path.Combine(ModuleDirectory,"..","..","lib","ADBMobileConfig.intermediate.json");
+
+			File.WriteAllText(JSONIntermediateConfigFile, RSID);
 
 			if (Target.Platform == UnrealTargetPlatform.IOS) {
 				var LibDir = Path.Combine(ModuleDirectory,"..","..","lib","iOS");
