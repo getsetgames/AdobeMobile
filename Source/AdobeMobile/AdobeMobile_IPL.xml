@@ -23,4 +23,8 @@
 
 		<setStringReplace resultFile="$S(BundleDir)/ADBMobileConfig.json" source="$S(sAdobeMobileConfigResult)" find="&quot;$${lifecycle-timeout}$$&quot;" with="$I(iLifeCycleTimeout)" default="900"/> 
 	</init>
+
+	<infoPlist>
+		<plutilCommands><![CDATA[-insert AdobeMobile -xml "<dict><key>AppName</key><string>$S(sAdobeMobileAppName)</string></dict>"]]></plutilCommands>
+	</infoPlist>
 </root>
