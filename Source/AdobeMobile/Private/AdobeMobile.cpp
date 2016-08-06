@@ -26,34 +26,96 @@ class FAdobeMobile : public IAdobeMobile
 
 IMPLEMENT_MODULE( FAdobeMobile, AdobeMobile )
 
+#if PLATFORM_IOS
+
+@interface AdobeMobileDelegate : NSObject
+{
+}
+
+@end
+
+static AdobeMobileDelegate *ams;
+
+@implementation AdobeMobileDelegate
+
++(void)load
+{
+    if (!ams)
+    {
+        ams = [[AdobeMobileDelegate alloc] init];
+    }
+}
+
+-(id)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationDidFinishLaunching:)
+                                                     name:UIApplicationDidFinishLaunchingNotification
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super dealloc];
+}
+
+-(void)applicationDidFinishLaunching:(NSNotification *)n
+{
+    NSDictionary *dLaunchOptionsUrl = n.userInfo[@"UIApplicationLaunchOptionsURLKey"];
+    
+    if (!dLaunchOptionsUrl)
+    {
+        NSString *sdkVersion = [NSString stringWithFormat:@"%@:%@:%@",
+                                [ADBMobile version],
+                                [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"],
+                                [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"]];
+        
+        NSDictionary *info    = [[NSBundle mainBundle] infoDictionary][@"AdobeMobile"];
+        NSString     *appName = @"";
+        
+        if (info)
+        {
+            appName = info[@"AppName"];
+
+            if (!appName)
+            {
+                UE_LOG(LogAdobeMobile, Log, TEXT("[AdobeMobile][AppName] was not found in info.plist tracking may not behave correctly"));
+            }
+        }
+        else
+        {
+            UE_LOG(LogAdobeMobile, Log, TEXT("[AdobeMobile] was not found in info.plist tracking may not behave correctly"));
+        }
+        
+        NSDictionary *d = @{ @"appname"    : appName,
+                             @"sdkversion" : sdkVersion };
+
+        [ADBMobile collectLifecycleDataWithAdditionalData:d];
+    }
+}
+
+@end
+
+#endif
+
 void FAdobeMobile::StartupModule()
 {
-	// register settings
-	if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
+    // register settings
+    if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
 	{
 		SettingsModule->RegisterSettings("Project", "Plugins", "AdobeMobile",
 										 LOCTEXT("RuntimeSettingsName", "AdobeMobile"),
 										 LOCTEXT("RuntimeSettingsDescription", "Configure the AdobeMobile plugin"),
-										 GetMutableDefault<UAdobeMobileSettings>()
-										 );
+										 GetMutableDefault<UAdobeMobileSettings>());
 	}
-    
-    const UAdobeMobileSettings *settings = GetDefault<UAdobeMobileSettings>();
-    
-#if PLATFORM_IOS
-    NSString *sdkVersion = [NSString stringWithFormat:@"%@:%@:%@",
-                            [ADBMobile version],
-                            [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"],
-                            [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"]];
-    
-    NSDictionary *d = @{ @"appname"    : settings->AppName.GetNSString(),
-                         @"sdkversion" : sdkVersion };
-    
-    [ADBMobile collectLifecycleDataWithAdditionalData:d];
-#elif PLATFORM_ANDROID
-    // Initilization of Android is done through plugin APL file.
-    //
-#endif
 }
 
 
