@@ -156,6 +156,13 @@ Config.collectLifecycleData(this, contextData);
 		</insert>
 	</gameActivityOnResumeAdditions>
 
+
+	<!-- optional additions to GameActivity onActivityResult in GameActivity.java -->
+	<gameActivityOnActivityResultAdditions>
+		<insert>
+
+		</insert>
+	</gameActivityOnActivityResultAdditions>
 	
 	<!-- optional libraries to load in GameActivity.java before libUE4.so -->
 	<soLoadLibrary>
