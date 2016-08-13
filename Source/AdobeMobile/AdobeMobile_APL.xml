@@ -46,15 +46,13 @@
 	<gameActivityImportAdditions>
 		<insert>
 import com.adobe.mobile.*;
+import java.util.Hashtable;
 		</insert>
 	</gameActivityImportAdditions>
 	
-
 	<!-- optional additions to the GameActivity class in GameActivity.java -->
 	<gameActivityClassAdditions>
-		<insert>
 
-		</insert>
 	</gameActivityClassAdditions>
 	
 	<!-- optional additions to GameActivity onCreate metadata reading in GameActivity.java -->
@@ -95,7 +93,7 @@ Config.setContext(this.getApplicationContext());
 	<!-- optional additions to GameActivity onPause in GameActivity.java	-->
 	<gameActivityOnPauseAdditions>
 		<insert>
-Config.collectLifecycleData(this);
+Config.pauseCollectingLifecycleData();
 		</insert>
 	</gameActivityOnPauseAdditions>
 
@@ -103,40 +101,37 @@ Config.collectLifecycleData(this);
 	<!-- optional additions to GameActivity onResume in GameActivity.java	-->
 	<gameActivityOnResumeAdditions>
 		<insert>
-Config.collectLifecycleData(this);
+// Get version number
+//
+PackageManager packageManager = getPackageManager();
+
+String packageName = getPackageName();
+String versionName = "not set";
+int    versionCode = 0;
+
+try 
+{
+	versionName = packageManager.getPackageInfo(packageName, 0).versionName;
+	versionCode = packageManager.getPackageInfo(packageName, 0).versionCode;
+} 
+catch (PackageManager.NameNotFoundException e) 
+{
+	e.printStackTrace();
+}
+
+String sdkVersion = Config.getVersion() + ":" + versionCode + ":" + versionName;
+String appName    = "</insert><insertValue value="$S(sAdobeMobileAppName)" /><insert>";
+
+Hashtable&lt;String, Object&gt; contextData = new Hashtable&lt;String, Object&gt;();
+
+contextData.put("appname",    appName);
+contextData.put("sdkversion", sdkVersion);
+
+Config.collectLifecycleData(this, contextData);
+
 		</insert>
 	</gameActivityOnResumeAdditions>
 
-
-	<!-- optional additions to GameActivity onActivityResult in GameActivity.java -->
-	<gameActivityOnActivityResultAdditions><![CDATA[
-
-public static void AndroidThunkJava_AdobeMobile_TrackState(String state, String[] keys, String[] values) 
-{
-	Hashtable<String, String> contextData = new Hashtable<String, String>();
-
-	for (int i = 0; i < keys.length; i++)
-	{
-		contextData.put(keys[i], values[i]);
-    }
-
-	Analytics.trackState(state, contextData);	
-}
-
-public static void AndroidThunkJava_AdobeMobile_TrackAction(String action, String[] keys, String[] values) 
-{
-	Hashtable<String, String> contextData = new Hashtable<String, String>();
-
-	for (int i = 0; i < keys.length; i++)
-	{
-		contextData.put(keys[i], values[i]);
-    }
-	
-	Analytics.trackAction(action, contextData);	
-}
-	
-
-	]]></gameActivityOnActivityResultAdditions>
 	
 	<!-- optional libraries to load in GameActivity.java before libUE4.so -->
 	<soLoadLibrary>
