@@ -32,7 +32,7 @@
 	<!-- optional additions to proguard -->
 	<proguardAdditions>
 		<insert>
-
+-dontwarn com.google.android.gms.wearable.**
 		</insert>
 	</proguardAdditions>
 	
