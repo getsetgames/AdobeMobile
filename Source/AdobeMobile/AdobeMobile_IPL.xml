@@ -45,7 +45,6 @@
 					<addElement       tag="$"         name="dAdobeMobile"/>
 			    	<addElement       tag="$"         name="dAdobeMobileRootDict"/>
 
-			    	<break/>
 			    </true>
 		    </if>
 		</loopElements>
