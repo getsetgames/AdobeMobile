@@ -13,8 +13,9 @@
 		<setIntFromProperty    result="iLifeCycleTimeout"           	    ini="Engine" section="/Script/AdobeMobile.AdobeMobileSettings" property="LifecycleTimeout" default="900"/>
 
 		<!-- Read in the intermediate file generated in Build.cs and make replacements as necessary -->
-		<setStringReplace result="sAdobeMobileConfigResult" sourceFile="$S(PluginDir)/../../lib/ADBMobileConfig.intermediate.json" find="$${app-name}$$" with="$S(sAdobeMobileAppName)" default=""/>
-		
+		<setStringFromFile result="sAdobeMobileConfigResult" value="$S(PluginDir)/../../lib/ADBMobileConfig.intermediate.json"/>
+		<setStringReplace  result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${app-name}$$" with="$S(sAdobeMobileAppName)" default=""/>
+
 		<!-- Only shipping or development will ever be used at a given time -->
 		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${tracking-rsid-shipping}$$"       with="$S(sAdobeMobileTrackingRSIDShipping)" default=""/>
 		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${tracking-rsid-development}$$"    with="$S(sAdobeMobileTrackingRSIDDevelopment)" default=""/>
