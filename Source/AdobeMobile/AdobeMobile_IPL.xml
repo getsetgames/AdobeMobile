@@ -20,8 +20,7 @@
 		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${tracking-rsid-development}$$"    with="$S(sAdobeMobileTrackingRSIDDevelopment)" default=""/>
 		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="$${target-server}$$"                with="$S(sAdobeMobileTrackingServer)" default=""/>
 		<setStringReplace result="sAdobeMobileConfigResult" source="$S(sAdobeMobileConfigResult)" find="&quot;$${offline-tracking}$$&quot;" with="$B(bAdobeMobileOfflineTracking)" default="true"/>
-
-		<setStringReplace resultFile="$S(BundleDir)/ADBMobileConfig.json" source="$S(sAdobeMobileConfigResult)" find="&quot;$${lifecycle-timeout}$$&quot;" with="$I(iLifeCycleTimeout)" default="900"/> 
+		<setStringReplace result="sAdobeMobileConfigResult" resultFile="$S(BuildDir)/ADBMobileConfig.json" source="$S(sAdobeMobileConfigResult)" find="&quot;$${lifecycle-timeout}$$&quot;" with="$I(iLifeCycleTimeout)" default="900"/> 
 	</init>
 
 	<iosPListUpdates>
