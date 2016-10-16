@@ -25,26 +25,23 @@
 	</init>
 
 	<iosPListUpdates>
-		<log text="Processing AdobeMobile ios..."/>
-
 		<loopElements tag="$">
 			<setStringFromTag result="sCurrentTag" tag="$"/>
 			<setBoolIsEqual   result="isRootDictionary" arg1="$S(sCurrentTag)" arg2="dict"/>
 
 			<if condition="isRootDictionary">
 				<true>
- 					<setElement    result="dAdobeMobile"         value="key" text="AdobeMobile"/>
-			    	<setElement    result="dAdobeMobileRootDict" value="dict"/>
+ 					<setElement result="dAdobeMobile"         value="key" text="AdobeMobile"/>
+			    	<setElement result="dAdobeMobileRootDict" value="dict"/>
 
-			    	<setElement    result="eAdobeMobileAppName"            value="key"    text="AppName"/>
-			    	<setElement    result="eAdobeMobileAppNameValue"       value="string" text="$S(sAdobeMobileAppName)"/>
+			    	<setElement result="eAdobeMobileAppName"      value="key"    text="AppName"/>
+			    	<setElement result="eAdobeMobileAppNameValue" value="string" text="$S(sAdobeMobileAppName)"/>
 
-   					<addElement       tag="$dAdobeMobileRootDict" name="eAdobeMobileAppName"/>
-			    	<addElement       tag="$dAdobeMobileRootDict" name="eAdobeMobileAppNameValue"/>
+   					<addElement tag="$dAdobeMobileRootDict" name="eAdobeMobileAppName"/>
+			    	<addElement tag="$dAdobeMobileRootDict" name="eAdobeMobileAppNameValue"/>
 
-					<addElement       tag="$"         name="dAdobeMobile"/>
-			    	<addElement       tag="$"         name="dAdobeMobileRootDict"/>
-
+					<addElement tag="$" name="dAdobeMobile"/>
+			    	<addElement tag="$" name="dAdobeMobileRootDict"/>			    
 			    </true>
 		    </if>
 		</loopElements>
