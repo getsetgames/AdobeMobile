@@ -3,8 +3,8 @@
 //  Copyright (c) 2016 Get Set Games Inc. All rights reserved.
 //
 
-#include "AdobeMobilePrivatePCH.h"
 #include "AdobeMobileSettings.h"
+#include "AdobeMobilePrivatePCH.h"
 
 UAdobeMobileSettings::UAdobeMobileSettings(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)

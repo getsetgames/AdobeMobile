@@ -3,6 +3,7 @@
 //  Copyright (c) 2016 Get Set Games Inc. All rights reserved.
 //
 
+#include "AdobeMobileFunctions.h"
 #include "AdobeMobilePrivatePCH.h"
 
 #if PLATFORM_IOS
