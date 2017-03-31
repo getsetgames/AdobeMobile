@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include "Components/ActorComponent.h"
 #include "AdobeMobileFunctions.h"
 #include "AdobeMobileComponent.generated.h"
 

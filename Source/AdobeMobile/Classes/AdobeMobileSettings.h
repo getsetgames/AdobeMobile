@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include "UObject/Object.h"
+#include "UObject/ScriptMacros.h"
 #include "AdobeMobileSettings.generated.h"
 
 UCLASS(config = Engine, defaultconfig)
