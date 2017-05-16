@@ -55,7 +55,7 @@ import java.util.Hashtable;
 	<!-- optional additions to the GameActivity class in GameActivity.java -->
 	<gameActivityClassAdditions>
 		<insert><![CDATA[
-public static void AndroidThunkJava_AdobeMobile_TrackState(String state, String[] keys, String[] values) 
+public void AndroidThunkJava_AdobeMobile_TrackState(String state, String[] keys, String[] values) 
 {
 	Hashtable<String, Object> contextData = new Hashtable<String, Object>();
 
@@ -67,7 +67,7 @@ public static void AndroidThunkJava_AdobeMobile_TrackState(String state, String[
 	Analytics.trackState(state, contextData);	
 }
 
-public static void AndroidThunkJava_AdobeMobile_TrackAction(String action, String[] keys, String[] values) 
+public void AndroidThunkJava_AdobeMobile_TrackAction(String action, String[] keys, String[] values) 
 {
 	Hashtable<String, Object> contextData = new Hashtable<String, Object>();
 
