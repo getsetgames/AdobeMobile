@@ -74,10 +74,10 @@ void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, TArray<FString>
                                                            "(Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V",
                                                            false);
         
-        jobjectArray jKeys   = (jobjectArray)Env->NewObjectArray(eventKeys.Num(),   FJavaWrapper::JavaStringClass, NULL);
-        jobjectArray jValues = (jobjectArray)Env->NewObjectArray(eventValues.Num(), FJavaWrapper::JavaStringClass, NULL);
+        jobjectArray jKeys   = (jobjectArray)Env->NewObjectArray(dataKeys.Num(),   FJavaWrapper::JavaStringClass, NULL);
+        jobjectArray jValues = (jobjectArray)Env->NewObjectArray(dataValues.Num(), FJavaWrapper::JavaStringClass, NULL);
         
-        CreateJavaKeyValueArrays(Env, jKeys, jValues, eventKeys, eventValues);
+        CreateJavaKeyValueArrays(Env, jKeys, jValues, dataKeys, dataValues);
         
         jstring jState = Env->NewStringUTF(TCHAR_TO_UTF8(*state));
         
@@ -130,10 +130,10 @@ void UAdobeMobileFunctions::AdobeMobileTrackAction(FString state, TArray<FString
                                                            "(Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V",
                                                            false);
         
-        jobjectArray jKeys   = (jobjectArray)Env->NewObjectArray(eventKeys.Num(),   FJavaWrapper::JavaStringClass, NULL);
-        jobjectArray jValues = (jobjectArray)Env->NewObjectArray(eventValues.Num(), FJavaWrapper::JavaStringClass, NULL);
+        jobjectArray jKeys   = (jobjectArray)Env->NewObjectArray(dataKeys.Num(),   FJavaWrapper::JavaStringClass, NULL);
+        jobjectArray jValues = (jobjectArray)Env->NewObjectArray(dataValues.Num(), FJavaWrapper::JavaStringClass, NULL);
         
-        CreateJavaKeyValueArrays(Env, jKeys, jValues, eventKeys, eventValues);
+        CreateJavaKeyValueArrays(Env, jKeys, jValues, dataKeys, dataValues);
 
         jstring jState = Env->NewStringUTF(TCHAR_TO_UTF8(*state));
         
