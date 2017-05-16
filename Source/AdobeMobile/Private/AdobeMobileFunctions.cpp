@@ -81,7 +81,7 @@ void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, TArray<FString>
         
         jstring jState = Env->NewStringUTF(TCHAR_TO_UTF8(*state));
         
-        FJavaWrapper::CallObjectMethod(Env, FJavaWrapper::GameActivityThis, Method, jState, jKeys, jValues);
+        FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, Method, jState, jKeys, jValues);
         
         Env->DeleteLocalRef(jKeys);
         Env->DeleteLocalRef(jValues);
@@ -137,7 +137,7 @@ void UAdobeMobileFunctions::AdobeMobileTrackAction(FString state, TArray<FString
 
         jstring jState = Env->NewStringUTF(TCHAR_TO_UTF8(*state));
         
-        FJavaWrapper::CallObjectMethod(Env, FJavaWrapper::GameActivityThis, Method, jState, jKeys, jValues);
+        FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, Method, jState, jKeys, jValues);
         
         Env->DeleteLocalRef(jKeys);
         Env->DeleteLocalRef(jValues);
