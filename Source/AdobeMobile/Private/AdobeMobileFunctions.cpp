@@ -56,7 +56,18 @@ void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, TArray<FString>
                                                            "(Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V",
                                                            false);
         
-        FJavaWrapper::CallObjectMethod(Env, FJavaWrapper::GameActivityThis, Method);
+        jobjectArray jKeys   = (jobjectArray)Env->NewObjectArray(eventKeys.Num(),   FJavaWrapper::JavaStringClass, NULL);
+        jobjectArray jValues = (jobjectArray)Env->NewObjectArray(eventValues.Num(), FJavaWrapper::JavaStringClass, NULL);
+        
+        CreateJavaKeyValueArrays(Env, jKeys, jValues, eventKeys, eventValues);
+        
+        jstring jState = Env->NewStringUTF(TCHAR_TO_UTF8(*state));
+        
+        FJavaWrapper::CallObjectMethod(Env, FJavaWrapper::GameActivityThis, Method, jState, jKeys, jValues);
+        
+        Env->DeleteLocalRef(jKeys);
+        Env->DeleteLocalRef(jValues);
+        Env->DeleteLocalRef(jState);
     }
 #endif
 }
@@ -101,7 +112,18 @@ void UAdobeMobileFunctions::AdobeMobileTrackAction(FString state, TArray<FString
                                                            "(Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V",
                                                            false);
         
-        FJavaWrapper::CallObjectMethod(Env, FJavaWrapper::GameActivityThis, Method);
+        jobjectArray jKeys   = (jobjectArray)Env->NewObjectArray(eventKeys.Num(),   FJavaWrapper::JavaStringClass, NULL);
+        jobjectArray jValues = (jobjectArray)Env->NewObjectArray(eventValues.Num(), FJavaWrapper::JavaStringClass, NULL);
+        
+        CreateJavaKeyValueArrays(Env, jKeys, jValues, eventKeys, eventValues);
+
+        jstring jState = Env->NewStringUTF(TCHAR_TO_UTF8(*state));
+        
+        FJavaWrapper::CallObjectMethod(Env, FJavaWrapper::GameActivityThis, Method, jState, jKeys, jValues);
+        
+        Env->DeleteLocalRef(jKeys);
+        Env->DeleteLocalRef(jValues);
+        Env->DeleteLocalRef(jState);
     }
 #endif
 }
