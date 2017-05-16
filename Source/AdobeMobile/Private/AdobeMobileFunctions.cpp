@@ -13,6 +13,24 @@
 #include "AndroidApplication.h"
 #endif
 
+#if PLATFORM_ANDROID
+void CreateJavaKeyValueArrays(JNIEnv *Env, jobjectArray &jKeysArray, jobjectArray &jValuesArray, TArray<FString> keys, TArray<FString> values)
+{
+    for (uint32 Param = 0; Param < keys.Num(); Param++)
+    {
+        jstring StringValue = Env->NewStringUTF(TCHAR_TO_UTF8(*keys[Param]));
+        
+        Env->SetObjectArrayElement(jKeysArray, Param, StringValue);
+        Env->DeleteLocalRef(StringValue);
+        
+        StringValue = Env->NewStringUTF(TCHAR_TO_UTF8(*values[Param]));
+        
+        Env->SetObjectArrayElement(jValuesArray, Param, StringValue);
+        Env->DeleteLocalRef(StringValue);
+    }
+}
+#endif
+
 void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, TArray<FString> dataKeys, TArray<FString> dataValues)
 {
     UE_LOG(LogAdobeMobile, Log, TEXT("Tracking State..."));
