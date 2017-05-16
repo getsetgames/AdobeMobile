@@ -14,7 +14,7 @@
 #endif
 
 #if PLATFORM_ANDROID
-void CreateJavaKeyValueArrays(JNIEnv *Env, jobjectArray &jKeysArray, jobjectArray &jValuesArray, TArray<FString> keys, TArray<FString> values)
+void AdobeMobile_CreateJavaKeyValueArrays(JNIEnv *Env, jobjectArray &jKeysArray, jobjectArray &jValuesArray, TArray<FString> keys, TArray<FString> values)
 {
     for (uint32 Param = 0; Param < keys.Num(); Param++)
     {
@@ -77,7 +77,7 @@ void UAdobeMobileFunctions::AdobeMobileTrackState(FString state, TArray<FString>
         jobjectArray jKeys   = (jobjectArray)Env->NewObjectArray(dataKeys.Num(),   FJavaWrapper::JavaStringClass, NULL);
         jobjectArray jValues = (jobjectArray)Env->NewObjectArray(dataValues.Num(), FJavaWrapper::JavaStringClass, NULL);
         
-        CreateJavaKeyValueArrays(Env, jKeys, jValues, dataKeys, dataValues);
+        AdobeMobile_CreateJavaKeyValueArrays(Env, jKeys, jValues, dataKeys, dataValues);
         
         jstring jState = Env->NewStringUTF(TCHAR_TO_UTF8(*state));
         
@@ -133,7 +133,7 @@ void UAdobeMobileFunctions::AdobeMobileTrackAction(FString state, TArray<FString
         jobjectArray jKeys   = (jobjectArray)Env->NewObjectArray(dataKeys.Num(),   FJavaWrapper::JavaStringClass, NULL);
         jobjectArray jValues = (jobjectArray)Env->NewObjectArray(dataValues.Num(), FJavaWrapper::JavaStringClass, NULL);
         
-        CreateJavaKeyValueArrays(Env, jKeys, jValues, dataKeys, dataValues);
+        AdobeMobile_CreateJavaKeyValueArrays(Env, jKeys, jValues, dataKeys, dataValues);
 
         jstring jState = Env->NewStringUTF(TCHAR_TO_UTF8(*state));
         
