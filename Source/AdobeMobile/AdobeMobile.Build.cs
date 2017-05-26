@@ -10,7 +10,7 @@ namespace UnrealBuildTool.Rules
 {
 	public class AdobeMobile : ModuleRules
 	{
-		public AdobeMobile(TargetInfo Target)
+		public AdobeMobile(ReadOnlyTargetRules Target) : base(Target)
 		{
 			PublicIncludePaths.AddRange(
 				new string[] {
